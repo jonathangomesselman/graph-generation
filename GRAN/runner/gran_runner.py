@@ -299,9 +299,22 @@ class GranRunner(object):
         # nll, avg_nll = gran_data_nll(args, model, test_loader)
         avg_nlls = []
         for batch_idx, data in enumerate(test_loader):
+          batch_fwd = []
+          
+          if self.use_gpu:
+            for dd, gpu_id in enumerate(self.gpus):
+              data = {}
+              data['adj'] = batch_data[dd][ff]['adj'].pin_memory().to(gpu_id, non_blocking=True)          
+              data['edges'] = batch_data[dd][ff]['edges'].pin_memory().to(gpu_id, non_blocking=True)
+              data['node_idx_gnn'] = batch_data[dd][ff]['node_idx_gnn'].pin_memory().to(gpu_id, non_blocking=True)
+              data['node_idx_feat'] = batch_data[dd][ff]['node_idx_feat'].pin_memory().to(gpu_id, non_blocking=True)
+              data['label'] = batch_data[dd][ff]['label'].pin_memory().to(gpu_id, non_blocking=True)
+              data['att_idx'] = batch_data[dd][ff]['att_idx'].pin_memory().to(gpu_id, non_blocking=True)
+              data['subgraph_idx'] = batch_data[dd][ff]['subgraph_idx'].pin_memory().to(gpu_id, non_blocking=True)
+              batch_fwd.append((data,))
           print("muah")
           print(data)
-          loss = model(data)
+          loss = model(*batch_fwd)
           print("heyyyy")
           print(loss.shape)
           print(loss)
