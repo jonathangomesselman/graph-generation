@@ -310,7 +310,6 @@ class GranRunner(object):
           if self.use_gpu:
             for dd, gpu_id in enumerate(self.gpus):
               data = {}
-              print("Yo incoming shape")
               data['adj'] = batch_data[dd][0]['adj'].pin_memory().to(gpu_id, non_blocking=True)          
               data['edges'] = batch_data[dd][0]['edges'].pin_memory().to(gpu_id, non_blocking=True)
               data['node_idx_gnn'] = batch_data[dd][0]['node_idx_gnn'].pin_memory().to(gpu_id, non_blocking=True)
@@ -319,8 +318,8 @@ class GranRunner(object):
               data['att_idx'] = batch_data[dd][0]['att_idx'].pin_memory().to(gpu_id, non_blocking=True)
               data['subgraph_idx'] = batch_data[dd][0]['subgraph_idx'].pin_memory().to(gpu_id, non_blocking=True)
               batch_fwd.append((data,))
-          print("muah")
-          print(data)
+          print("yo")
+          print(batch_fwd)
           loss = model(*batch_fwd)
           print("heyyyy")
           print(loss.shape)
