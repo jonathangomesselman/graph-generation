@@ -305,7 +305,6 @@ class GranRunner(object):
             for _ in self.gpus:
               data = test_iterator.next()
               batch_data.append(data)
-            batch_fwd = []
           
           if self.use_gpu:
             for dd, gpu_id in enumerate(self.gpus):
@@ -317,10 +316,8 @@ class GranRunner(object):
               data['label'] = batch_data[dd][0]['label'].pin_memory().to(gpu_id, non_blocking=True)
               data['att_idx'] = batch_data[dd][0]['att_idx'].pin_memory().to(gpu_id, non_blocking=True)
               data['subgraph_idx'] = batch_data[dd][0]['subgraph_idx'].pin_memory().to(gpu_id, non_blocking=True)
-              batch_fwd.append((data,))
           print("yo")
-          print(batch_fwd)
-          loss = model(*batch_fwd)
+          loss = model(data)
           print("heyyyy")
           print(loss.shape)
           print(loss)
