@@ -1,0 +1,11 @@
+INFO  | 12/06/2019 10:49:06 PM | File run_exp.py           | Line 26    | Writing log file to exp/GRAN/GRANMixtureBernoulli_DD_2019-Dec-06-22-49-06_39595/log_exp_39595.txt
+INFO  | 12/06/2019 10:49:06 PM | File run_exp.py           | Line 27    | Exp instance id = 39595
+INFO  | 12/06/2019 10:49:06 PM | File run_exp.py           | Line 28    | Exp comment = None
+INFO  | 12/06/2019 10:49:06 PM | File run_exp.py           | Line 29    | Config =
+ERROR | 12/06/2019 10:49:06 PM | File run_exp.py           | Line 42    | Traceback (most recent call last):
+  File "run_exp.py", line 36, in main
+    runner = eval(config.runner)(config)
+  File "/lfs/hyperion3/0/jgs8/graph-generation/GRAN/runner/gran_runner.py", line 105, in __init__
+    assert self.use_gpu == True
+AssertionError
+

@@ -1,0 +1,15 @@
+INFO  | 12/06/2019 10:40:49 PM | File run_exp.py           | Line 26    | Writing log file to exp/GRAN/GRANMixtureBernoulli_DD_2019-Dec-06-22-40-49_38307/log_exp_38307.txt
+INFO  | 12/06/2019 10:40:49 PM | File run_exp.py           | Line 27    | Exp instance id = 38307
+INFO  | 12/06/2019 10:40:49 PM | File run_exp.py           | Line 28    | Exp comment = None
+INFO  | 12/06/2019 10:40:49 PM | File run_exp.py           | Line 29    | Config =
+INFO  | 12/06/2019 10:41:08 PM | File gran_runner.py       | Line 124   | Train/val/test = 734/183/184
+INFO  | 12/06/2019 10:41:10 PM | File gran_runner.py       | Line 137   | No Edges vs. Edges in training set = 124.02113340808721
+ERROR | 12/06/2019 10:41:43 PM | File run_exp.py           | Line 42    | Traceback (most recent call last):
+  File "run_exp.py", line 38, in main
+    runner.train()
+  File "/lfs/hyperion3/0/jgs8/graph-generation/GRAN/runner/gran_runner.py", line 171, in train
+    model = eval(self.model_conf.name)(self.config)
+  File "/lfs/hyperion3/0/jgs8/graph-generation/GRAN/model/gran_mixture_bernoulli.py", line 203, in __init__
+    pos_weight=pos_weight, reduction='none')
+TypeError: __init__() got an unexpected keyword argument 'pos_weight'
+
