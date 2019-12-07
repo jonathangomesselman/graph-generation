@@ -274,7 +274,7 @@ class GranRunner(object):
     return 1
 
   def test(self):
-    # self.config.save_dir = self.test_conf.test_model_dir
+    self.config.save_dir = self.test_conf.test_model_dir
 
     ### Compute Erdos-Renyi baseline    
     if self.config.test.is_test_ER:
@@ -284,7 +284,7 @@ class GranRunner(object):
       ### load model
       model = eval(self.model_conf.name)(self.config)
       model_file = os.path.join(self.config.save_dir, self.test_conf.test_model_name)
-      load_model(model, model_file, self.device)
+      load_model(model, "snapshot_model/gran_ENZYMES.pth", self.device)
 
       if self.use_gpu:
         model = nn.DataParallel(model, device_ids=self.gpus).to(self.device)
@@ -305,7 +305,7 @@ class GranRunner(object):
           print(loss)
           avg_nlls.extend(loss)
         iter_avg_nlls.append(avg_nlls)
-        
+
 
 
 
