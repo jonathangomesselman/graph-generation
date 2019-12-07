@@ -310,6 +310,10 @@ class GranRunner(object):
           if self.use_gpu:
             for dd, gpu_id in enumerate(self.gpus):
               data = {}
+              print("Yo incoming shape")
+              print(len(batch_data))
+              print(len(batch_data[0]))
+              print(len(batch_data[0][0]))
               data['adj'] = batch_data[dd][ff]['adj'].pin_memory().to(gpu_id, non_blocking=True)          
               data['edges'] = batch_data[dd][ff]['edges'].pin_memory().to(gpu_id, non_blocking=True)
               data['node_idx_gnn'] = batch_data[dd][ff]['node_idx_gnn'].pin_memory().to(gpu_id, non_blocking=True)
