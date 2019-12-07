@@ -205,6 +205,14 @@ def create_graphs(graph_type, data_dir='data', noise=10.0, seed=1234):
         name='FIRSTMM_DB',
         node_attributes=False,
         graph_labels=True)
+  elif graph_type == 'ENZYMES':
+    graphs = graph_load_batch(
+        data_dir,
+        min_num_nodes=10,
+        max_num_nodes=1000,
+        name='ENZYMES',
+        node_attributes=False,
+        graph_labels=True)
 
   num_nodes = [gg.number_of_nodes() for gg in graphs]
   num_edges = [gg.number_of_edges() for gg in graphs]
