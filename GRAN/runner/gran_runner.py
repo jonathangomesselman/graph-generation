@@ -269,6 +269,8 @@ class GranRunner(object):
         logger.info("Saving Snapshot @ epoch {:04d}".format(epoch + 1))
         snapshot(model.module if self.use_gpu else model, optimizer, self.config, epoch + 1, scheduler=lr_scheduler)
     
+    print("Torch saving the GRAN model!")
+    torch.save(model.state_dict(), os.path.join(self.config.save_dir, 'gran_model.dat'))
     pickle.dump(results, open(os.path.join(self.config.save_dir, 'train_stats.p'), 'wb'))
     self.writer.close()
     
