@@ -305,7 +305,6 @@ class GranRunner(object):
             for _ in self.gpus:
               data = test_iterator.next()
               batch_data.append(data)
-              iter_count += 1
             batch_fwd = []
           
           if self.use_gpu:
