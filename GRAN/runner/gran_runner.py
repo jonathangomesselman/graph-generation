@@ -317,7 +317,7 @@ class GranRunner(object):
               data['att_idx'] = batch_data[dd][0]['att_idx'].pin_memory().to(gpu_id, non_blocking=True)
               data['subgraph_idx'] = batch_data[dd][0]['subgraph_idx'].pin_memory().to(gpu_id, non_blocking=True)
           print("yo")
-          loss = model(data)
+          loss = model(batch_data[0][0])
           print("heyyyy")
           print(loss.shape)
           print(loss)
