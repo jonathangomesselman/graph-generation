@@ -294,7 +294,7 @@ class GranRunner(object):
       test_dataset = eval(self.dataset_conf.loader_name)(self.config, self.graphs_test, tag='test')
       test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=1)
 
-      iter_avg_nlls
+      iter_avg_nlls = []
       for i in range(max_iter):
         # nll, avg_nll = gran_data_nll(args, model, test_loader)
         avg_nlls = []
