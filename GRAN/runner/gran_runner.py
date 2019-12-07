@@ -298,8 +298,15 @@ class GranRunner(object):
       for i in range(10):
         # nll, avg_nll = gran_data_nll(args, model, test_loader)
         avg_nlls = []
-        for batch_idx, data in enumerate(test_loader):
-          batch_fwd = []
+        test_iterator = test_loader.__iter__()
+        for inner_iter in range(len(test_loader) // self.num_gpus):
+          batch_data = []
+          if self.use_gpu:
+            for _ in self.gpus:
+              data = test_iterator.next()
+              batch_data.append(data)
+              iter_count += 1
+            batch_fwd = []
           
           if self.use_gpu:
             for dd, gpu_id in enumerate(self.gpus):
