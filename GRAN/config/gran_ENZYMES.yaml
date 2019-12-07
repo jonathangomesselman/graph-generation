@@ -64,4 +64,4 @@ test:
   vis_num_row: 5 # visualize `num_vis` samples in `vis_num_row` rows
   better_vis: true  
   test_model_dir: snapshot_model
-  test_model_name: gran_DD.pth
+  test_model_name: gran_ENZYMES.pth
