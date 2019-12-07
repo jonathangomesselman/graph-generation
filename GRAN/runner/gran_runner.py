@@ -274,7 +274,7 @@ class GranRunner(object):
     return 1
 
   def test(self):
-    self.config.save_dir = self.test_conf.test_model_dir
+    # self.config.save_dir = self.test_conf.test_model_dir
 
     ### Compute Erdos-Renyi baseline    
     if self.config.test.is_test_ER:
