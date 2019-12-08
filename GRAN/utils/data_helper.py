@@ -216,8 +216,8 @@ def create_graphs(graph_type, data_dir='data', noise=10.0, seed=1234, label=None
 
   if label is not None:
     for graph in graphs:
-      print(x.graph['label'])
-      if x.graph['label'] == label:
+      print(graph.graph['label'])
+      if graph.graph['label'] == label:
         print("yayyyy")
     graphs = list(filter(lambda x: x.graph['label'] == label, graphs))
     print(len(graphs))
