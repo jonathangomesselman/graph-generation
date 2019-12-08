@@ -305,17 +305,17 @@ class GranRunner(object):
               data = test_iterator.next()
               batch_data.append(data)
           
-          if self.use_gpu:
-            for dd, gpu_id in enumerate(self.gpus):
-              data = {}
-              data['adj'] = batch_data[dd][0]['adj'].pin_memory().to(gpu_id, non_blocking=True)          
-              data['edges'] = batch_data[dd][0]['edges'].pin_memory().to(gpu_id, non_blocking=True)
-              data['node_idx_gnn'] = batch_data[dd][0]['node_idx_gnn'].pin_memory().to(gpu_id, non_blocking=True)
-              data['node_idx_feat'] = batch_data[dd][0]['node_idx_feat'].pin_memory().to(gpu_id, non_blocking=True)
-              data['label'] = batch_data[dd][0]['label'].pin_memory().to(gpu_id, non_blocking=True)
-              data['att_idx'] = batch_data[dd][0]['att_idx'].pin_memory().to(gpu_id, non_blocking=True)
-              data['subgraph_idx'] = batch_data[dd][0]['subgraph_idx'].pin_memory().to(gpu_id, non_blocking=True)
-          loss = model(data)
+          # if self.use_gpu:
+          #   for dd, gpu_id in enumerate(self.gpus):
+          #     data = {}
+          #     data['adj'] = batch_data[dd][0]['adj'].pin_memory().to(gpu_id, non_blocking=True)          
+          #     data['edges'] = batch_data[dd][0]['edges'].pin_memory().to(gpu_id, non_blocking=True)
+          #     data['node_idx_gnn'] = batch_data[dd][0]['node_idx_gnn'].pin_memory().to(gpu_id, non_blocking=True)
+          #     data['node_idx_feat'] = batch_data[dd][0]['node_idx_feat'].pin_memory().to(gpu_id, non_blocking=True)
+          #     data['label'] = batch_data[dd][0]['label'].pin_memory().to(gpu_id, non_blocking=True)
+          #     data['att_idx'] = batch_data[dd][0]['att_idx'].pin_memory().to(gpu_id, non_blocking=True)
+          #     data['subgraph_idx'] = batch_data[dd][0]['subgraph_idx'].pin_memory().to(gpu_id, non_blocking=True)
+          loss = model(batch_data[0][0])
           avg_nlls.append(loss)
         iter_avg_nlls.append(avg_nlls)
 
