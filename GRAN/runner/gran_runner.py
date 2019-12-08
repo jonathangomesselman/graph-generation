@@ -290,7 +290,9 @@ class GranRunner(object):
         model = nn.DataParallel(model, device_ids=self.gpus).to(self.device)
 
       model.eval()
-
+      print("heyyyy")
+      print(self.graphs_train)
+      print(self.graphs_test)
       test_dataset = eval(self.dataset_conf.loader_name)(self.config, self.graphs_test, tag='test')
       test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=1, collate_fn=test_dataset.collate_fn, drop_last=False)
 
