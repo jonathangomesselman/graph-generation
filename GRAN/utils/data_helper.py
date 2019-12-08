@@ -156,7 +156,11 @@ def graph_load_batch(data_dir,
   return graphs
 
 
+<<<<<<< HEAD
 def create_graphs(graph_type, data_dir='data', noise=10.0, seed=1234, label=None):
+=======
+def create_graphs(graph_type, data_dir='data', noise=10.0, seed=1234):
+>>>>>>> ec486ed04fc7568d50f1cb16cf47ae2e6f06a325
   npr = np.random.RandomState(seed)
   ### load datasets
   graphs = []
