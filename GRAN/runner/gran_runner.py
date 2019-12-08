@@ -322,10 +322,7 @@ class GranRunner(object):
 
 
           iter_avg_nlls = np.array(iter_avg_nlls)
-          print(iter_avg_nlls)
-          print(iter_avg_nlls.shape)
-
-          np.mean(iter_avg_nlls, axis=0)
+          iter_avg_nlls = np.mean(iter_avg_nlls, axis=0)
           np.save(save_path, iter_avg_nlls)
 
 

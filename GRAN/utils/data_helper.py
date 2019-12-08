@@ -156,7 +156,7 @@ def graph_load_batch(data_dir,
   return graphs
 
 
-def create_graphs(graph_type, data_dir='data', noise=10.0, seed=1234):
+def create_graphs(graph_type, data_dir='data', noise=10.0, seed=1234, label=None):
   npr = np.random.RandomState(seed)
   ### load datasets
   graphs = []
@@ -213,6 +213,14 @@ def create_graphs(graph_type, data_dir='data', noise=10.0, seed=1234):
         name='ENZYMES',
         node_attributes=False,
         graph_labels=True)
+
+  if label is not None:
+    print("heyoo")
+    print(graphs)
+    print(graphs[0])
+    print(graphs[0].graph)
+    print(graphs[0].graph['label'])
+    graphs = filter(lambda x: x.graph['label'] == label, graphs)
 
   num_nodes = [gg.number_of_nodes() for gg in graphs]
   num_edges = [gg.number_of_edges() for gg in graphs]
