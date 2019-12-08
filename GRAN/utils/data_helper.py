@@ -216,10 +216,10 @@ def create_graphs(graph_type, data_dir='data', noise=10.0, seed=1234, label=None
 
   if label is not None:
     print("heyoo")
-    print(graphs)
-    print(graphs[0])
-    print(graphs[0].graph)
     print(graphs[0].graph['label'])
+    print(graphs[1].graph['label'])
+    print(graphs[2].graph['label'])
+    print(graphs[3].graph['label'])
     graphs = filter(lambda x: x.graph['label'] == label, graphs)
 
   num_nodes = [gg.number_of_nodes() for gg in graphs]
