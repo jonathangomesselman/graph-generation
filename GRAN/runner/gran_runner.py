@@ -292,7 +292,7 @@ class GranRunner(object):
       model.eval()
 
       test_dataset = eval(self.dataset_conf.loader_name)(self.config, self.graphs_test, tag='test')
-      test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=1)
+      test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=1, collate_fn=test_dataset.collate_fn, drop_last=False)
 
       iter_avg_nlls = []
       for i in range(10):
@@ -317,7 +317,7 @@ class GranRunner(object):
               data['att_idx'] = batch_data[dd][0]['att_idx'].pin_memory().to(gpu_id, non_blocking=True)
               data['subgraph_idx'] = batch_data[dd][0]['subgraph_idx'].pin_memory().to(gpu_id, non_blocking=True)
           print("yo")
-          loss = model(batch_data[0][0])
+          loss = model(data)
           print("heyyyy")
           print(loss.shape)
           print(loss)
