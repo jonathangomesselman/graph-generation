@@ -339,6 +339,13 @@ class GranRunner(object):
 
       calc_nll(train_loader, model, os.path.join(self.config.save_dir, 'train_avg_graph_nlls.npy'))
 
+      anomaly_graphs = create_graphs('DD', data_dir=config.dataset.data_path)
+      print("Anomaly graphs with len ", len(anomaly_graphs))
+      anomaly_dataset = eval(self.dataset_conf.loader_name)(self.config, anomaly_graphs, tag='train')
+      anomaly_loader = torch.utils.data.DataLoader(anomaly_dataset, batch_size=1, collate_fn=anomaly_dataset.collate_fn, drop_last=False)
+
+      calc_nll(anomaly_loader, model, os.path.join(self.config.save_dir, 'anomaly_avg_graph_nlls.npy'))
+
       ### Generate Graphs
       # A_pred = []
       # num_nodes_pred = []
