@@ -23,8 +23,6 @@ class GRANData(object):
 
     self.graphs = graphs
     self.num_graphs = len(graphs)
-    print("YOOOO")
-    print(self.num_graphs)
     self.npr = np.random.RandomState(config.seed)
     self.node_order = config.dataset.node_order
     self.num_canonical_order = config.model.num_canonical_order

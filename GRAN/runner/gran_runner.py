@@ -128,8 +128,11 @@ class GranRunner(object):
       self.npr = np.random.RandomState(self.seed)
       self.npr.shuffle(self.graphs)
 
-    self.graphs_train = self.graphs[:self.num_train + self.num_dev]
-    self.graphs_test = self.graphs[self.num_train + self.num_dev:]
+    self.graphs_train = self.graphs[:self.num_train]
+    self.graphs_test = self.graphs[self.num_train:]
+    print("Lengths now")
+    print(len(self.graphs_train))
+    print(len(self.graphs_test))
     
     self.config.dataset.sparse_ratio = compute_edge_ratio(self.graphs_train)
     logger.info('No Edges vs. Edges in training set = {}'.format(
