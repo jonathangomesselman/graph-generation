@@ -320,6 +320,10 @@ class GranRunner(object):
           avg_nlls.append(loss)
         iter_avg_nlls.append(avg_nlls)
 
+      print(iter_avg_nlls)
+      print(len(iter_avg_nlls))
+      print(len(iter_avg_nlls[0]))
+
 
 
 
