@@ -329,15 +329,15 @@ class GranRunner(object):
           np.save(save_path, iter_avg_nlls)
 
 
-      # test_dataset = eval(self.dataset_conf.loader_name)(self.config, self.graphs_test, tag='test')
-      # test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=1, collate_fn=test_dataset.collate_fn, drop_last=False)
+      train_dataset = eval(self.dataset_conf.loader_name)(self.config, self.graphs_train, tag='train')
+      train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=1, collate_fn=train_dataset.collate_fn, drop_last=False)
 
-      # calc_nll(test_loader, model, os.path.join(self.config.save_dir, 'test_avg_graph_nlls.npy'))
+      calc_nll(train_loader, model, os.path.join(self.config.save_dir, 'train_avg_graph_nlls.npy'))
 
-      # train_dataset = eval(self.dataset_conf.loader_name)(self.config, self.graphs_train, tag='train')
-      # train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=1, collate_fn=train_dataset.collate_fn, drop_last=False)
+      test_dataset = eval(self.dataset_conf.loader_name)(self.config, self.graphs_test, tag='test')
+      test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=1, collate_fn=test_dataset.collate_fn, drop_last=False)
 
-      # calc_nll(train_loader, model, os.path.join(self.config.save_dir, 'train_avg_graph_nlls.npy'))
+      calc_nll(test_loader, model, os.path.join(self.config.save_dir, 'test_avg_graph_nlls.npy'))
 
       anomaly_graphs = create_graphs('DD', data_dir=self.config.dataset.data_path)
       print("Anomaly graphs with len ", len(anomaly_graphs))
