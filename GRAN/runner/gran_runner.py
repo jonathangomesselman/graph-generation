@@ -316,12 +316,8 @@ class GranRunner(object):
               data['label'] = batch_data[dd][0]['label'].pin_memory().to(gpu_id, non_blocking=True)
               data['att_idx'] = batch_data[dd][0]['att_idx'].pin_memory().to(gpu_id, non_blocking=True)
               data['subgraph_idx'] = batch_data[dd][0]['subgraph_idx'].pin_memory().to(gpu_id, non_blocking=True)
-          print("yo")
           loss = model(data)
-          print("heyyyy")
-          print(loss.shape)
-          print(loss)
-          avg_nlls.extend(loss)
+          avg_nlls.append(loss)
         iter_avg_nlls.append(avg_nlls)
 
 
