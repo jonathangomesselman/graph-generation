@@ -294,37 +294,38 @@ class GranRunner(object):
       test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=1, collate_fn=test_dataset.collate_fn, drop_last=False)
 
       iter_avg_nlls = []
-      for i in range(20):
-        # nll, avg_nll = gran_data_nll(args, model, test_loader)
-        avg_nlls = []
-        test_iterator = test_loader.__iter__()
-        print(i)
-        for inner_iter in range(len(test_loader) // self.num_gpus):
-          print("wee")
-          batch_data = []
-          if self.use_gpu:
-            for _ in self.gpus:
-              data = test_iterator.next()
-              batch_data.append(data)
-          
-          # if self.use_gpu:
-          #   for dd, gpu_id in enumerate(self.gpus):
-          #     data = {}
-          #     data['adj'] = batch_data[dd][0]['adj'].pin_memory().to(gpu_id, non_blocking=True)          
-          #     data['edges'] = batch_data[dd][0]['edges'].pin_memory().to(gpu_id, non_blocking=True)
-          #     data['node_idx_gnn'] = batch_data[dd][0]['node_idx_gnn'].pin_memory().to(gpu_id, non_blocking=True)
-          #     data['node_idx_feat'] = batch_data[dd][0]['node_idx_feat'].pin_memory().to(gpu_id, non_blocking=True)
-          #     data['label'] = batch_data[dd][0]['label'].pin_memory().to(gpu_id, non_blocking=True)
-          #     data['att_idx'] = batch_data[dd][0]['att_idx'].pin_memory().to(gpu_id, non_blocking=True)
-          #     data['subgraph_idx'] = batch_data[dd][0]['subgraph_idx'].pin_memory().to(gpu_id, non_blocking=True)
-          loss = model(batch_data[0][0])
-          avg_nlls.append(loss)
-        iter_avg_nlls.append(avg_nlls)
-        torch.cuda.empty_cache()
+      with torch.no_grad():
+        for i in range(20):
+          # nll, avg_nll = gran_data_nll(args, model, test_loader)
+          avg_nlls = []
+          test_iterator = test_loader.__iter__()
+          print(i)
+          for inner_iter in range(len(test_loader) // self.num_gpus):
+            print("wee")
+            batch_data = []
+            if self.use_gpu:
+              for _ in self.gpus:
+                data = test_iterator.next()
+                batch_data.append(data)
+            
+            # if self.use_gpu:
+            #   for dd, gpu_id in enumerate(self.gpus):
+            #     data = {}
+            #     data['adj'] = batch_data[dd][0]['adj'].pin_memory().to(gpu_id, non_blocking=True)          
+            #     data['edges'] = batch_data[dd][0]['edges'].pin_memory().to(gpu_id, non_blocking=True)
+            #     data['node_idx_gnn'] = batch_data[dd][0]['node_idx_gnn'].pin_memory().to(gpu_id, non_blocking=True)
+            #     data['node_idx_feat'] = batch_data[dd][0]['node_idx_feat'].pin_memory().to(gpu_id, non_blocking=True)
+            #     data['label'] = batch_data[dd][0]['label'].pin_memory().to(gpu_id, non_blocking=True)
+            #     data['att_idx'] = batch_data[dd][0]['att_idx'].pin_memory().to(gpu_id, non_blocking=True)
+            #     data['subgraph_idx'] = batch_data[dd][0]['subgraph_idx'].pin_memory().to(gpu_id, non_blocking=True)
+            loss = model(batch_data[0][0])
+            avg_nlls.append(loss)
+          iter_avg_nlls.append(avg_nlls)
+          torch.cuda.empty_cache()
 
-      iter_avg_nlls = np.array(iter_avg_nlls)
-      print(iter_avg_nlls)
-      print(iter_avg_nlls.shape)
+        iter_avg_nlls = np.array(iter_avg_nlls)
+        print(iter_avg_nlls)
+        print(iter_avg_nlls.shape)
 
 
 
