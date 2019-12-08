@@ -299,6 +299,7 @@ class GranRunner(object):
         # nll, avg_nll = gran_data_nll(args, model, test_loader)
         avg_nlls = []
         test_iterator = test_loader.__iter__()
+        print(len(test_loader))
         for inner_iter in range(len(test_loader) // self.num_gpus):
           batch_data = []
           if self.use_gpu:
