@@ -320,6 +320,7 @@ class GranRunner(object):
           loss = model(batch_data[0][0])
           avg_nlls.append(loss)
         iter_avg_nlls.append(avg_nlls)
+        torch.cuda.empty_cache()
 
       iter_avg_nlls = np.array(iter_avg_nlls)
       print(iter_avg_nlls)
