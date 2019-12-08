@@ -130,9 +130,6 @@ class GranRunner(object):
 
     self.graphs_train = self.graphs[:self.num_train]
     self.graphs_test = self.graphs[self.num_train:]
-    print("Lengths now")
-    print(len(self.graphs_train))
-    print(len(self.graphs_test))
     
     self.config.dataset.sparse_ratio = compute_edge_ratio(self.graphs_train)
     logger.info('No Edges vs. Edges in training set = {}'.format(
@@ -293,18 +290,14 @@ class GranRunner(object):
         model = nn.DataParallel(model, device_ids=self.gpus).to(self.device)
 
       model.eval()
-      print("heyyyy")
-      print(self.graphs_train)
-      print(self.graphs_test)
       test_dataset = eval(self.dataset_conf.loader_name)(self.config, self.graphs_test, tag='test')
       test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=1, collate_fn=test_dataset.collate_fn, drop_last=False)
 
       iter_avg_nlls = []
-      for i in range(10):
+      for i in range(20):
         # nll, avg_nll = gran_data_nll(args, model, test_loader)
         avg_nlls = []
         test_iterator = test_loader.__iter__()
-        print(len(test_dataset))
         for inner_iter in range(len(test_loader) // self.num_gpus):
           batch_data = []
           if self.use_gpu:
@@ -326,9 +319,9 @@ class GranRunner(object):
           avg_nlls.append(loss)
         iter_avg_nlls.append(avg_nlls)
 
+      iter_avg_nlls = np.array(iter_avg_nlls)
       print(iter_avg_nlls)
-      print(len(iter_avg_nlls))
-      print(len(iter_avg_nlls[0]))
+      print(iter_avg_nlls.shape)
 
 
 
