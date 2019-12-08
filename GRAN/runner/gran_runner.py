@@ -334,7 +334,10 @@ class GranRunner(object):
 
       calc_nll(test_loader, model, os.path.join(self.config.save_dir, 'test_avg_graph_nlls.npy'))
 
+      train_dataset = eval(self.dataset_conf.loader_name)(self.config, self.graphs_train, tag='train')
+      train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=1, collate_fn=train_dataset.collate_fn, drop_last=False)
 
+      calc_nll(train_loader, model, os.path.join(self.config.save_dir, 'train_avg_graph_nlls.npy'))
 
       ### Generate Graphs
       # A_pred = []
