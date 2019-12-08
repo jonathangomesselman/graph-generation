@@ -299,9 +299,7 @@ class GranRunner(object):
           # nll, avg_nll = gran_data_nll(args, model, test_loader)
           avg_nlls = []
           test_iterator = test_loader.__iter__()
-          print(i)
           for inner_iter in range(len(test_loader) // self.num_gpus):
-            print("wee")
             batch_data = []
             if self.use_gpu:
               for _ in self.gpus:
@@ -318,7 +316,7 @@ class GranRunner(object):
             #     data['label'] = batch_data[dd][0]['label'].pin_memory().to(gpu_id, non_blocking=True)
             #     data['att_idx'] = batch_data[dd][0]['att_idx'].pin_memory().to(gpu_id, non_blocking=True)
             #     data['subgraph_idx'] = batch_data[dd][0]['subgraph_idx'].pin_memory().to(gpu_id, non_blocking=True)
-            loss = model(batch_data[0][0])
+            loss = model(batch_data[0][0]).item()
             avg_nlls.append(loss)
           iter_avg_nlls.append(avg_nlls)
           torch.cuda.empty_cache()
