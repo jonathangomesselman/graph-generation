@@ -108,7 +108,7 @@ class GranRunner(object):
       self.config.save_dir = self.train_conf.resume_dir
 
     ### load graphs
-    self.graphs = create_graphs(config.dataset.name, data_dir=config.dataset.data_path, label=0)
+    self.graphs = create_graphs(config.dataset.name, data_dir=config.dataset.data_path, label=1)
     
     self.train_ratio = config.dataset.train_ratio
     self.dev_ratio = config.dataset.dev_ratio
@@ -336,7 +336,7 @@ class GranRunner(object):
 
       calc_nll(test_loader, model, os.path.join(self.config.save_dir, 'test_avg_graph_nlls.npy'))
 
-      anomaly_graphs = create_graphs(config.dataset.name, data_dir=config.dataset.data_path, label=1)
+      anomaly_graphs = create_graphs(config.dataset.name, data_dir=config.dataset.data_path, label=2)
       print("Anomaly graphs with len ", len(anomaly_graphs))
       anomaly_dataset = eval(self.dataset_conf.loader_name)(self.config, anomaly_graphs, tag='train')
       anomaly_loader = torch.utils.data.DataLoader(anomaly_dataset, batch_size=1, collate_fn=anomaly_dataset.collate_fn, drop_last=False)

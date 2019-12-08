@@ -141,7 +141,6 @@ def graph_load_batch(data_dir,
     G_sub = G.subgraph(nodes)
     if graph_labels:
       G_sub.graph['label'] = data_graph_labels[i]
-      print(data_graph_labels[i])
     # print('nodes', G_sub.number_of_nodes())
     # print('edges', G_sub.number_of_edges())
     # print('label', G_sub.graph)
@@ -216,11 +215,6 @@ def create_graphs(graph_type, data_dir='data', noise=10.0, seed=1234, label=None
         graph_labels=True)
 
   if label is not None:
-    print("heyoo")
-    print(graphs[0].graph['label'])
-    print(graphs[1].graph['label'])
-    print(graphs[2].graph['label'])
-    print(graphs[3].graph['label'])
     graphs = filter(lambda x: x.graph['label'] == label, graphs)
 
   num_nodes = [gg.number_of_nodes() for gg in graphs]
