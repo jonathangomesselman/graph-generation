@@ -215,7 +215,7 @@ def create_graphs(graph_type, data_dir='data', noise=10.0, seed=1234, label=None
         graph_labels=True)
 
   if label is not None:
-    graphs = filter(lambda x: x.graph['label'] == label, graphs)
+    graphs = filter(lambda x: if x.graph['label'] == label: print(x.graph['label']); x.graph['label'] == label, graphs)
 
   num_nodes = [gg.number_of_nodes() for gg in graphs]
   num_edges = [gg.number_of_edges() for gg in graphs]
