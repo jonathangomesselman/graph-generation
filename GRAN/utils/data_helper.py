@@ -121,7 +121,7 @@ def graph_load_batch(data_dir,
   # add node attributes
   if node_attributes:
     for i in range(data_node_att.shape[0]):
-      G.add_node(i + 1)
+      G.add_node(i + 1, feature=data_node_att[i])
   G.remove_nodes_from(list(nx.isolates(G)))
 
   # remove self-loop
