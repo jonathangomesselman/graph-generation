@@ -136,6 +136,7 @@ def graph_load_batch(data_dir,
   graphs = []
   max_nodes = 0
   for i in range(graph_num):
+    print(data_graph_labels[i])
     # find the nodes for each graph
     nodes = node_list[data_graph_indicator == i + 1]
     G_sub = G.subgraph(nodes)
@@ -153,7 +154,6 @@ def graph_load_batch(data_dir,
       # print('Graph dataset name: {}, total graph num: {}'.format(name, len(graphs)))
       # logging.warning('Graphs loaded, total num: {}'.format(len(graphs)))
   print('Loaded')
-  print(data_graph_labels)
   return graphs
 
 
