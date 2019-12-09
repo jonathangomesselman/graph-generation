@@ -235,6 +235,15 @@ def create_graphs(graph_type, data_dir='data', noise=10.0, seed=1234, label=None
         node_attributes=False,
         graph_labels=True,
         graph_label_to_choose=label)
+  elif graph_type == 'AIDS':
+    graphs = graph_load_batch(
+        data_dir,
+        min_num_nodes=2,
+        max_num_nodes=100,
+        name='AIDS',
+        node_attributes=False,
+        graph_labels=True,
+        graph_label_to_choose=label)
 
   num_nodes = [gg.number_of_nodes() for gg in graphs]
   num_edges = [gg.number_of_edges() for gg in graphs]
