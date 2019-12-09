@@ -101,9 +101,9 @@ def graph_load_batch(data_dir,
     data_node_att = np.loadtxt(
         os.path.join(path, '{}_node_attributes.txt'.format(name)),
         delimiter=',')
-  data_node_label = np.loadtxt(
-      os.path.join(path, '{}_node_labels.txt'.format(name)),
-      delimiter=',').astype(int)
+  # data_node_label = np.loadtxt(
+  #     os.path.join(path, '{}_node_labels.txt'.format(name)),
+  #     delimiter=',').astype(int)
   data_graph_indicator = np.loadtxt(
       os.path.join(path, '{}_graph_indicator.txt'.format(name)),
       delimiter=',').astype(int)
@@ -122,7 +122,7 @@ def graph_load_batch(data_dir,
   for i in range(data_node_label.shape[0]):
     if node_attributes:
       G.add_node(i + 1, feature=data_node_att[i])
-    G.add_node(i + 1, label=data_node_label[i])
+    G.add_node(i + 1)
   G.remove_nodes_from(list(nx.isolates(G)))
 
   # remove self-loop
