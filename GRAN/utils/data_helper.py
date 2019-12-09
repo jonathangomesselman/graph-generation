@@ -218,6 +218,7 @@ def create_graphs(graph_type, data_dir='data', noise=10.0, seed=1234, label=None
         graph_labels=True)
 
   print(graphs)
+  print(len(graphs))
   if label is not None:
     for i, subgraph in enumerate(graphs):
       print(i)
