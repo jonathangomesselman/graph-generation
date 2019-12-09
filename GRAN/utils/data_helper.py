@@ -141,6 +141,7 @@ def graph_load_batch(data_dir,
     G_sub = G.subgraph(nodes)
     if graph_labels:
       G_sub.graph['label'] = data_graph_labels[i]
+      print(G_sub.graph['label'])
     # print('nodes', G_sub.number_of_nodes())
     # print('edges', G_sub.number_of_edges())
     # print('label', G_sub.graph)
