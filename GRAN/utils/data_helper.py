@@ -218,12 +218,12 @@ def create_graphs(graph_type, data_dir='data', noise=10.0, seed=1234, label=None
         node_attributes=False,
         graph_labels=True,
         graph_label_to_choose=label)
-  elif graph_type == 'ENZYMES':
+  elif graph_type == 'COLLAB':
     graphs = graph_load_batch(
         data_dir,
-        min_num_nodes=0,
-        max_num_nodes=10000,
-        name='ENZYMES',
+        min_num_nodes=32,
+        max_num_nodes=492,
+        name='COLLAB',
         node_attributes=False,
         graph_labels=True,
         graph_label_to_choose=label)
