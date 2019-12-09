@@ -216,19 +216,7 @@ def create_graphs(graph_type, data_dir='data', noise=10.0, seed=1234, label=None
         name='ENZYMES',
         node_attributes=False,
         graph_labels=True,
-        graph_label_to_choose=1)
-
-  print(graphs)
-  print(len(graphs))
-  if label is not None:
-    for i, subgraph in enumerate(graphs):
-      print(i)
-      print(subgraph.graph['label'])
-      print(subgraph)
-      if subgraph.graph['label'] == label:
-        print("yayyyy")
-    graphs = list(filter(lambda x: x.graph['label'] == label, subgraph))
-    print(len(graphs))
+        graph_label_to_choose=label)
 
   num_nodes = [gg.number_of_nodes() for gg in graphs]
   num_edges = [gg.number_of_edges() for gg in graphs]
