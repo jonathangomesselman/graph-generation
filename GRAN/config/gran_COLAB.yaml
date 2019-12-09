@@ -5,11 +5,11 @@ runner: GranRunner
 use_horovod: False
 use_gpu: true
 device: cuda:0
-gpus: [0]
+gpus: [2]
 seed: 1234
 dataset:
   loader_name: GRANData
-  name: ENZYMES
+  name: COLAB
   data_path: ../dataset/
   node_order: BFS # k_core/BFS/degree_decent
   train_ratio: 0.8
@@ -64,4 +64,4 @@ test:
   vis_num_row: 5 # visualize `num_vis` samples in `vis_num_row` rows
   better_vis: true  
   test_model_dir: snapshot_model
-  test_model_name: gran_ENZYMES.pth
+  test_model_name: gran_COLAB.pth
