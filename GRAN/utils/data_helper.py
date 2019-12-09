@@ -153,6 +153,8 @@ def graph_load_batch(data_dir,
       # print('Graph dataset name: {}, total graph num: {}'.format(name, len(graphs)))
       # logging.warning('Graphs loaded, total num: {}'.format(len(graphs)))
   print('Loaded')
+  for graph in graphs:
+    print(graph.graph['label'])
   return graphs
 
 
@@ -213,6 +215,8 @@ def create_graphs(graph_type, data_dir='data', noise=10.0, seed=1234, label=None
         name='ENZYMES',
         node_attributes=False,
         graph_labels=True)
+
+  print(graphs)
   if label is not None:
     for i, subgraph in enumerate(graphs):
       print(i)
