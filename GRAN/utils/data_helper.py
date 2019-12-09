@@ -153,6 +153,7 @@ def graph_load_batch(data_dir,
       # print('Graph dataset name: {}, total graph num: {}'.format(name, len(graphs)))
       # logging.warning('Graphs loaded, total num: {}'.format(len(graphs)))
   print('Loaded')
+  print(data_graph_labels)
   return graphs
 
 
