@@ -194,11 +194,12 @@ def create_graphs(graph_type, data_dir='data', noise=10.0, seed=1234, label=None
   elif graph_type == 'DD':
     graphs = graph_load_batch(
         data_dir,
-        min_num_nodes=100,
-        max_num_nodes=500,
+        min_num_nodes=0,
+        max_num_nodes=10000,
         name='DD',
         node_attributes=False,
-        graph_labels=True)
+        graph_labels=True,
+        graph_label_to_choose=label)
     # args.max_prev_node = 230
   elif graph_type == 'FIRSTMM_DB':
     graphs = graph_load_batch(
@@ -208,6 +209,15 @@ def create_graphs(graph_type, data_dir='data', noise=10.0, seed=1234, label=None
         name='FIRSTMM_DB',
         node_attributes=False,
         graph_labels=True)
+  elif graph_type == 'ENZYMES':
+    graphs = graph_load_batch(
+        data_dir,
+        min_num_nodes=0,
+        max_num_nodes=10000,
+        name='ENZYMES',
+        node_attributes=False,
+        graph_labels=True,
+        graph_label_to_choose=label)
   elif graph_type == 'ENZYMES':
     graphs = graph_load_batch(
         data_dir,
