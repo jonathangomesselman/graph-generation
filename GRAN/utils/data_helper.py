@@ -85,7 +85,8 @@ def graph_load_batch(data_dir,
                      max_num_nodes=1000,
                      name='ENZYMES',
                      node_attributes=True,
-                     graph_labels=True):
+                     graph_labels=True,
+                     graph_label_to_choose=None):
   '''
     load many graphs, e.g. enzymes
     :return: a list of graphs
@@ -136,12 +137,13 @@ def graph_load_batch(data_dir,
   graphs = []
   max_nodes = 0
   for i in range(graph_num):
+    if graph_label_to_choose is not None and (graph_label_to_choose != data_graph_labels[i]):
+      continue
     # find the nodes for each graph
     nodes = node_list[data_graph_indicator == i + 1]
     G_sub = G.subgraph(nodes)
     if graph_labels:
       G_sub.graph['label'] = data_graph_labels[i]
-      print(G_sub.graph['label'])
     # print('nodes', G_sub.number_of_nodes())
     # print('edges', G_sub.number_of_edges())
     # print('label', G_sub.graph)
@@ -154,8 +156,6 @@ def graph_load_batch(data_dir,
       # print('Graph dataset name: {}, total graph num: {}'.format(name, len(graphs)))
       # logging.warning('Graphs loaded, total num: {}'.format(len(graphs)))
   print('Loaded')
-  for graph in graphs:
-    print(graph.graph['label'])
   return graphs
 
 
