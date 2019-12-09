@@ -214,9 +214,10 @@ def create_graphs(graph_type, data_dir='data', noise=10.0, seed=1234, label=None
         node_attributes=False,
         graph_labels=True)
   if label is not None:
-    print(len(graphs))
-    for subgraph in graphs:
+    for i, subgraph in enumerate(graphs):
+      print(i)
       print(subgraph.graph['label'])
+      print(subgraph)
       if subgraph.graph['label'] == label:
         print("yayyyy")
     graphs = list(filter(lambda x: x.graph['label'] == label, subgraph))
