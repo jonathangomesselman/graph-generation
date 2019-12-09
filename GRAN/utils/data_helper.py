@@ -215,7 +215,8 @@ def create_graphs(graph_type, data_dir='data', noise=10.0, seed=1234, label=None
         max_num_nodes=10000,
         name='ENZYMES',
         node_attributes=False,
-        graph_labels=True)
+        graph_labels=True,
+        graph_label_to_choose=1)
 
   print(graphs)
   print(len(graphs))
