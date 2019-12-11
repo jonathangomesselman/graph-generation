@@ -329,19 +329,19 @@ class GranRunner(object):
       train_dataset = eval(self.dataset_conf.loader_name)(self.config, self.graphs_train, tag='train')
       train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=1, collate_fn=train_dataset.collate_fn, drop_last=False)
 
-      calc_nll(train_loader, model, os.path.join("snapshot_{}/gran_{}.pth".format(self.config.dataset.name, self.config.dataset.name), 'train_avg_graph_nlls.npy'))
+      calc_nll(train_loader, model, os.path.join("snapshot_{}".format(self.config.dataset.name), 'train_avg_graph_nlls.npy'))
 
       test_dataset = eval(self.dataset_conf.loader_name)(self.config, self.graphs_test, tag='test')
       test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=1, collate_fn=test_dataset.collate_fn, drop_last=False)
 
-      calc_nll(test_loader, model, os.path.join("snapshot_{}/gran_{}.pth".format(self.config.dataset.name, self.config.dataset.name), 'test_avg_graph_nlls.npy'))
+      calc_nll(test_loader, model, os.path.join("snapshot_{}".format(self.config.dataset.name), 'test_avg_graph_nlls.npy'))
 
       anomaly_graphs = create_graphs(config.dataset.name, data_dir=config.dataset.data_path, label=0)
       print("Anomaly graphs with len ", len(anomaly_graphs))
       anomaly_dataset = eval(self.dataset_conf.loader_name)(self.config, anomaly_graphs, tag='train')
       anomaly_loader = torch.utils.data.DataLoader(anomaly_dataset, batch_size=1, collate_fn=anomaly_dataset.collate_fn, drop_last=False)
 
-      calc_nll(anomaly_loader, model, os.path.join("snapshot_{}/gran_{}.pth".format(self.config.dataset.name, self.config.dataset.name), 'anomaly_avg_graph_nlls.npy'))
+      calc_nll(anomaly_loader, model, os.path.join("snapshot_{}".format(self.config.dataset.name), 'anomaly_avg_graph_nlls.npy'))
 
       ### Generate Graphs
       # A_pred = []
