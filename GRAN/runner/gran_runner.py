@@ -284,7 +284,7 @@ class GranRunner(object):
       ### load model
       model = eval(self.model_conf.name)(self.config)
       model_file = os.path.join(self.config.save_dir, self.test_conf.test_model_name)
-      load_model(model, "snapshot_model/gran_ENZYMES.pth", self.device)
+      load_model(model, "snapshot_{}/gran_{}.pth".format(self.config.dataset.name, self.config.dataset.name), self.device)
 
       if self.use_gpu:
         model = nn.DataParallel(model, device_ids=self.gpus).to(self.device)
@@ -336,7 +336,7 @@ class GranRunner(object):
 
       calc_nll(test_loader, model, os.path.join(self.config.save_dir, 'test_avg_graph_nlls.npy'))
 
-      anomaly_graphs = create_graphs(config.dataset.name, data_dir=config.dataset.data_path, label=2)
+      anomaly_graphs = create_graphs(config.dataset.name, data_dir=config.dataset.data_path, label=0)
       print("Anomaly graphs with len ", len(anomaly_graphs))
       anomaly_dataset = eval(self.dataset_conf.loader_name)(self.config, anomaly_graphs, tag='train')
       anomaly_loader = torch.utils.data.DataLoader(anomaly_dataset, batch_size=1, collate_fn=anomaly_dataset.collate_fn, drop_last=False)
